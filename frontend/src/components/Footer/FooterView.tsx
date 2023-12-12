@@ -1,7 +1,9 @@
+import "./index.scss";
+
 export default function FooterView(): JSX.Element {
     return (
         <footer>
-            <span>Rodapé</span>
+            <p>&copy; {new Date().getFullYear()}. Todos os direitos reservados.</p>
         </footer>
     )
 }

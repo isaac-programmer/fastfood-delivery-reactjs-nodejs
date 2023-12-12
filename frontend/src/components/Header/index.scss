@@ -1,0 +1,31 @@
+header {
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    nav {
+        ul {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+
+            li {
+                list-style: none;
+
+                a {
+                    color: #59320F;
+                    text-decoration: none;
+                }
+
+                .active {
+                    color: white;
+                    display: inline-block;
+                    padding: 10px 20px;
+                    border-radius: 25px;
+                    background-color: #A60303;
+                }
+            }
+        }
+    }
+}
