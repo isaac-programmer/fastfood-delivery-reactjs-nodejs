@@ -22,6 +22,10 @@ main {
 
         .botao {
             background-color: #A60303;
+
+            &:hover {
+                background-color: #A60303;
+            }
         }
     }
 }
