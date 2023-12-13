@@ -21,11 +21,11 @@ let users = [{
   name: "Usuário 1", 
   email: "teste@teste.com",
   phone: "(99) 99999-9999",
-  cep: "99999-999",
+  cep: "62051-045",
   state: "CE",
   city: "Sobral",
-  bairro: "Cohab",
-  address: "Rua Teste",
+  bairro: "Cohab II",
+  address: "Rua Francisco Ximenes Menezes",
   number: 1000,
   complement: "Casa"
 }];
@@ -70,6 +70,7 @@ app.post("/user", (req, res) => {
     };
     
     users.push(newUser);
+    console.log(users);
     res.status(201).json(newUser);
   } else {
     res.status(400).json({ error: "CPF existente" });
@@ -81,19 +82,21 @@ app.put("/user/:id", (req, res) => {
   const userId = parseInt(req.params.id);
   const updateUser = req.body;
   users = users.map((user) => {
-    if (user.id === userId) {
+    if(user.id === userId) {
       return { ...user, ...updateUser };
     }
     return user;
   });
-  res.json(users.find((user) => user.id === userId));
+  console.log(users);
+  res.status(200).json(users.find((user) => user.id === userId));
 });
 
 // Rota para deletar um usuário
 app.delete("/user/:id", (req, res) => {
   const userId = parseInt(req.params.id);
   users = users.filter((user) => user.id !== userId);
-  res.json({ message: "Usuário deletado com sucesso" });
+  console.log(users);
+  res.status(200).json({ message: "Usuário deletado com sucesso" });
 });
 
 // Rota para obter todos os produtos
