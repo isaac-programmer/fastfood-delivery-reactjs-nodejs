@@ -4,7 +4,7 @@ import UserRegister from "../pages/Public/UserRegister";
 export default function PublicRoutes(): JSX.Element {
   return (
     <Routes>
-      <Route path="/" element={<UserRegister />} />
+      <Route path="/register-user" element={<UserRegister />} />
     </Routes>
   );
 }

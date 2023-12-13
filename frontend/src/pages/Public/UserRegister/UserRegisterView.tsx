@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { State, User } from "../../../types";
 import { formatarCEP, formatarCPF, formatarPhone } from "../../../utils/masks";
 import { Button, MenuItem, TextField } from "@mui/material";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 const INITIAL_VALUES_FORMDATA: User = {
   id: 0,
@@ -16,61 +16,89 @@ const INITIAL_VALUES_FORMDATA: User = {
   city: "",
   bairro: "",
   address: "",
-  number: 0,
+  number: "",
   complement: "",
-}
+};
 
 export default function UserRegisterView(): JSX.Element {
   const [formData, setFormData] = useState<User>(INITIAL_VALUES_FORMDATA);
   const [states, setStates] = useState<State[]>([]);
 
+  const postUser = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      await axios.post(`http://localhost:5000/user`, formData);
+
+      alert("Usuário cadastrado com sucesso!");
+    } catch(error: unknown) {
+      if(error instanceof AxiosError) {
+        console.log(error);
+
+        if(error.response?.data.error === "CPF existente"){
+          alert("O CPF informado já está cadastrado");
+        }
+      }
+    }
+  };
+
   useEffect(() => {
-    if(formData.cep.length === 9){
+    if (formData.cep.length === 9) {
       const getDataByCep = async (cep: string) => {
         try {
-          const { data } = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+          const { data } = await axios.get(
+            `https://viacep.com.br/ws/${cep}/json/`
+          );
 
           // Caso o CEP não exista, a API retorna 200 porém com um objeto contendo
           // um atributo 'erro' com valor 'true'.
-          if(!data.erro && data.erro !== true) {
+          if (!data.erro && data.erro !== true) {
             setFormData({
               ...formData,
               city: data.localidade,
               state: data.uf,
               address: data.logradouro,
               bairro: data.bairro,
-              complement: data.complemento
+              complement: data.complemento,
             });
+          } else {
+            alert("CEP inválido");
           }
-        } catch(error) {
+        } catch (error) {
           console.log(error);
         }
-      }
+      };
 
       const cepOnlyNumbers = formData.cep.replace("-", "");
       getDataByCep(cepOnlyNumbers);
     }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.cep]);
 
   useEffect(() => {
     const getStatesOrderByName = async () => {
       try {
-        const result = await axios.get("https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome");
+        const result = await axios.get(
+          "https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome"
+        );
 
         setStates(result.data);
-      } catch(error) {
+      } catch (error) {
         console.log(error);
       }
-    }
+    };
 
     getStatesOrderByName();
   }, []);
 
   return (
     <main>
-      <form>
+      <form
+        onSubmit={(e) => {
+          postUser(e);
+        }}
+      >
         <h1>Cadastro de Usuário</h1>
 
         <TextField
@@ -78,7 +106,7 @@ export default function UserRegisterView(): JSX.Element {
           type="text"
           label="CPF"
           value={formData.cpf}
-          inputProps={{maxLength: 14, minLength: 14}}
+          inputProps={{ maxLength: 14, minLength: 14 }}
           onChange={(e) => {
             setFormData({ ...formData, cpf: formatarCPF(e.target.value) });
           }}
@@ -137,7 +165,9 @@ export default function UserRegisterView(): JSX.Element {
           }}
         >
           {states.map((state: State, index: number) => (
-            <MenuItem key={index} value={state.sigla}>{state.nome}</MenuItem>
+            <MenuItem key={index} value={state.sigla}>
+              {state.nome}
+            </MenuItem>
           ))}
         </TextField>
 
@@ -177,7 +207,7 @@ export default function UserRegisterView(): JSX.Element {
           type="number"
           value={formData.number}
           onChange={(e) => {
-            setFormData({ ...formData, number: Number(e.target.value) });
+            setFormData({ ...formData, number: e.target.value });
           }}
           InputLabelProps={{
             shrink: true,

@@ -16,7 +16,7 @@ export type User = {
     city: string;
     bairro: string;
     address: string;
-    number: number;
+    number: string;
     complement: string;
 }
 
