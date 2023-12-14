@@ -1,8 +1,23 @@
+export type Login = {
+    cpf: string;
+}
+
 export type Product = {
     id: number;
     name: string;
     price: string;
     img: string;
+}
+
+export type State = {
+    id: number;
+    sigla: string;
+    nome: string;
+    regiao: {
+        id: number;
+        sigla: string;
+        nome: string;
+    }
 }
 
 export type User = {
@@ -18,15 +33,4 @@ export type User = {
     address: string;
     number: string;
     complement: string;
-}
-
-export type State = {
-    id: number;
-    sigla: string;
-    nome: string;
-    regiao: {
-        id: number;
-        sigla: string;
-        nome: string;
-    }
 }

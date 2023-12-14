@@ -57,8 +57,8 @@ app.get("/user/:id", (req, res) => {
 
 // Rota para adicionar um novo usuário
 app.post("/user", (req, res) => {
-  const newUserCpf = req.body.cpf;
-  const user = users.find((user) => user.cpf === newUserCpf);
+  const { cpf } = req.body;
+  const user = users.find((user) => user.cpf === cpf);
 
   // Verifica se já existe um usuário com o CPF informado na requisição.
   if(!user) {
@@ -97,6 +97,22 @@ app.delete("/user/:id", (req, res) => {
   users = users.filter((user) => user.id !== userId);
   console.log(users);
   res.status(200).json({ message: "Usuário deletado com sucesso" });
+});
+
+// Rota para efetuar o login
+app.post('/login', (req, res) => {
+  const { cpf } = req.body;
+
+  // Procura o usuário pelo CPF no "banco de dados"
+  const user = users.find(user => user.cpf === cpf);
+
+  // Verifica se o usuário existe
+  if(!user) {
+    return res.status(401).json({ error: 'Usuário não encontrado.' });
+  }
+
+  // Autenticação bem-sucedida, retornando os detalhes do usuário
+  return res.status(200).json(user);
 });
 
 // Rota para obter todos os produtos
