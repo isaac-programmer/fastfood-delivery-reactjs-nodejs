@@ -17,6 +17,8 @@ export default function LoginView(): JSX.Element {
 
     try {
       await axios.post(`http://localhost:5000/login`, formData);
+
+      sessionStorage.setItem("signed", "true");
       setSigned(true);
       history("/");
     } catch(error: unknown) {
