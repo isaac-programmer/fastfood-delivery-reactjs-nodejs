@@ -10,13 +10,16 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import 'swiper/css/effect-fade';
+import AuthProvider from "./context/Auth/provider";
 
 function App(): JSX.Element {
   return (
     <React.Fragment>
-      <BrowserRouter>
-        <Rotas />
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Rotas />
+        </BrowserRouter>
+      </AuthProvider>
     </React.Fragment>
   );
 }

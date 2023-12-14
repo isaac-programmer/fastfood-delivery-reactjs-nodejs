@@ -5,9 +5,11 @@ import { useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { formatarCPF } from "../../../utils/masks";
 import { Link, useNavigate } from "react-router-dom";
+import useAuthContext from "../../../context/Auth/hook";
 
 export default function LoginView(): JSX.Element {
   const history = useNavigate();
+  const { setSigned } = useAuthContext();
   const [formData, setFormData] = useState<Login>({ cpf: "" });
 
   const login = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -15,7 +17,7 @@ export default function LoginView(): JSX.Element {
 
     try {
       await axios.post(`http://localhost:5000/login`, formData);
-      sessionStorage.setItem("signed", "true");
+      setSigned(true);
       history("/");
     } catch(error: unknown) {
       console.log(error);

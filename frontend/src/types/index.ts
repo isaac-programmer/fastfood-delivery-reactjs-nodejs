@@ -1,3 +1,5 @@
+import { Dispatch, ReactNode, SetStateAction } from "react";
+
 export type Login = {
     cpf: string;
 }
@@ -33,4 +35,13 @@ export type User = {
     address: string;
     number: string;
     complement: string;
+}
+
+export type AuthContextType = {
+    signed: boolean;
+    setSigned: Dispatch<SetStateAction<boolean>>;
+}
+
+export type AuthContextProps = {
+    children: ReactNode;
 }
