@@ -1,9 +1,10 @@
 import "./index.scss";
+import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { State, User } from "../../../types";
-import { formatarCEP, formatarCPF, formatarPhone } from "../../../utils/masks";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, MenuItem, TextField } from "@mui/material";
-import axios, { AxiosError } from "axios";
+import { formatarCEP, formatarCPF, formatarPhone } from "../../../utils/masks";
 
 const INITIAL_VALUES_FORMDATA: User = {
   id: 0,
@@ -21,16 +22,19 @@ const INITIAL_VALUES_FORMDATA: User = {
 };
 
 export default function UserRegisterView(): JSX.Element {
-  const [formData, setFormData] = useState<User>(INITIAL_VALUES_FORMDATA);
+  const history = useNavigate();
   const [states, setStates] = useState<State[]>([]);
+  const [formData, setFormData] = useState<User>(INITIAL_VALUES_FORMDATA);
 
   const postUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
       await axios.post(`http://localhost:5000/user`, formData);
-
       alert("Usuário cadastrado com sucesso!");
+
+      // Redireciona para a tela de login
+      history("/");
     } catch(error: unknown) {
       if(error instanceof AxiosError) {
         console.log(error);
@@ -227,6 +231,8 @@ export default function UserRegisterView(): JSX.Element {
         <Button className="botao" type="submit" variant="contained">
           Cadastrar
         </Button>
+
+        <Link id="link-login" to="/">Já possui cadastro? Efetue o login aqui</Link>
       </form>
     </main>
   );

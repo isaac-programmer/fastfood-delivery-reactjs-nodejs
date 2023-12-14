@@ -1,10 +1,10 @@
 import "./index.scss";
+import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { State, User } from "../../../types";
-import { formatarCEP, formatarCPF, formatarPhone } from "../../../utils/masks";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, MenuItem, TextField } from "@mui/material";
-import axios, { AxiosError } from "axios";
-import { useParams } from "react-router-dom";
+import { formatarCEP, formatarCPF, formatarPhone } from "../../../utils/masks";
 
 const INITIAL_VALUES_FORMDATA: User = {
   id: 0,
@@ -23,6 +23,7 @@ const INITIAL_VALUES_FORMDATA: User = {
 
 export default function UserUpdateView(): JSX.Element {
   const { id } = useParams();
+  const history = useNavigate();
   const [states, setStates] = useState<State[]>([]);
   const [formData, setFormData] = useState<User>(INITIAL_VALUES_FORMDATA);
 
@@ -32,8 +33,13 @@ export default function UserUpdateView(): JSX.Element {
     try {
       await axios.put(`http://localhost:5000/user/${id}`, formData);
       alert("Usuário atualizado com sucesso!");
+
+      // Redireciona para a tela home
+      history("/");
     } catch(error: unknown) {
       if(error instanceof AxiosError) {
+        console.log(error);
+
         if(error.response?.data.error === "CPF existente"){
           alert("O CPF informado já está cadastrado");
         }
@@ -109,6 +115,8 @@ export default function UserUpdateView(): JSX.Element {
 
   return (
     <main>
+      <Link to="/">Voltar</Link>
+      
       <form
         onSubmit={(e) => {
           putUser(e);

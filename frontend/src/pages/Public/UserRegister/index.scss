@@ -27,5 +27,14 @@ main {
                 background-color: #A60303;
             }
         }
+
+        #link-login {
+            color: #59320F;
+            text-align: center;
+
+            &:hover {
+                color: #A60303;
+            }
+        }
     }
 }

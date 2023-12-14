@@ -1,5 +1,5 @@
 import React from "react";
-import PublicRoutes from "./PublicRoutes";
+// import PublicRoutes from "./PublicRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 import useAuthContext from "../context/Auth/hook";
 
@@ -8,7 +8,7 @@ export default function Rotas(): JSX.Element {
 
   return (
     <React.Fragment>
-      {signed ? <PrivateRoutes /> : <PublicRoutes />}
+      {signed ? <PrivateRoutes /> : <PrivateRoutes />}
     </React.Fragment>
   );
 }
