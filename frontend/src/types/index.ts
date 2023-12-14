@@ -24,6 +24,7 @@ export type State = {
 
 export type User = {
     id: number;
+    role: string;
     cpf: string;
     name: string;
     email: string;
@@ -38,8 +39,10 @@ export type User = {
 }
 
 export type AuthContextType = {
-    signed: boolean;
-    setSigned: Dispatch<SetStateAction<boolean>>;
+    userRole: string;
+    userSigned: boolean;
+    setUserRole: Dispatch<SetStateAction<string>>;
+    setUserSigned: Dispatch<SetStateAction<boolean>>;
 }
 
 export type AuthContextProps = {

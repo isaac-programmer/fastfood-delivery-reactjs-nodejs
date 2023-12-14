@@ -8,6 +8,7 @@ import { formatarCEP, formatarCPF, formatarPhone } from "../../../utils/masks";
 
 const INITIAL_VALUES_FORMDATA: User = {
   id: 0,
+  role: "client",
   cpf: "",
   name: "",
   email: "",

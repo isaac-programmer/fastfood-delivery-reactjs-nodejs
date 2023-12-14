@@ -9,17 +9,20 @@ import useAuthContext from "../../../context/Auth/hook";
 
 export default function LoginView(): JSX.Element {
   const history = useNavigate();
-  const { setSigned } = useAuthContext();
+  const { setUserSigned, setUserRole } = useAuthContext();
   const [formData, setFormData] = useState<Login>({ cpf: "" });
 
   const login = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      await axios.post(`http://localhost:5000/login`, formData);
+      const { data } = await axios.post(`http://localhost:5000/login`, formData);
 
-      sessionStorage.setItem("signed", "true");
-      setSigned(true);
+      sessionStorage.setItem("userSigned", "true");
+      sessionStorage.setItem("userRole", `${data.role}`);
+      setUserSigned(true);
+      setUserRole(data.role);
+
       history("/");
     } catch(error: unknown) {
       console.log(error);

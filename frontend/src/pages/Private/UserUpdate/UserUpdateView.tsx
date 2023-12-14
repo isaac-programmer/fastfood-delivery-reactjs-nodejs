@@ -8,6 +8,7 @@ import { formatarCEP, formatarCPF, formatarPhone } from "../../../utils/masks";
 
 const INITIAL_VALUES_FORMDATA: User = {
   id: 0,
+  role: "client",
   cpf: "",
   name: "",
   email: "",
@@ -48,7 +49,7 @@ export default function UserUpdateView(): JSX.Element {
   };
 
   useEffect(() => {
-    if (formData.cep.length === 9) {
+    if(formData.cep.length === 9) {
       const getDataByCep = async (cep: string) => {
         try {
           const { data } = await axios.get(
@@ -63,8 +64,7 @@ export default function UserUpdateView(): JSX.Element {
               city: data.localidade,
               state: data.uf,
               address: data.logradouro,
-              bairro: data.bairro,
-              complement: data.complemento,
+              bairro: data.bairro
             });
           } else {
             alert("CEP inválido");

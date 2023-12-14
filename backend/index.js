@@ -17,6 +17,7 @@ app.use(express.json());
 // Simulação de um banco de dados
 let users = [{ 
   id: 1,
+  role: "admin",
   cpf: "999.999.999-89", 
   name: "Usuário 1", 
   email: "teste@teste.com",
