@@ -1,7 +1,7 @@
 import "./index.scss";
-import { Login } from "../../../types";
 import axios from "axios";
-import { useState } from "react";
+import React, { useState } from "react";
+import { Login } from "../../../types";
 import { Button, TextField } from "@mui/material";
 import { formatarCPF } from "../../../utils/masks";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,13 +10,18 @@ import useAuthContext from "../../../context/Auth/hook";
 export default function LoginView(): JSX.Element {
   const history = useNavigate();
   const { setUserSigned, setUserRole } = useAuthContext();
+
+  const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<Login>({ cpf: "" });
 
   const login = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post(`http://localhost:5000/login`, formData);
+      const { data } = await axios.post(
+        `http://localhost:5000/login`,
+        formData
+      );
 
       sessionStorage.setItem("userSigned", "true");
       sessionStorage.setItem("userRole", `${data.role}`);
@@ -24,16 +29,21 @@ export default function LoginView(): JSX.Element {
       setUserRole(data.role);
 
       history("/");
-    } catch(error: unknown) {
+    } catch (error: unknown) {
       console.log(error);
       alert("Erro ao efetuar o login! Verifique o CPF informado");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <main id="login">
       <form
-        onSubmit={(e) => { login(e) }}
+        onSubmit={(e) => {
+          setLoading(true);
+          login(e);
+        }}
       >
         <h1>Login</h1>
 
@@ -47,9 +57,21 @@ export default function LoginView(): JSX.Element {
             setFormData({ ...formData, cpf: formatarCPF(e.target.value) });
           }}
         />
-
-        <Button className="botao" type="submit" variant="contained">
-          Entrar
+        
+        <Button 
+          type="submit" 
+          className="botao" 
+          variant="contained"
+          disabled={loading}
+          style={{ backgroundColor: loading ? "#A603038A" : "#A60303" }}
+        >
+          {loading ? (
+            <div className="container-loader">
+              <div className="dot"></div>
+            </div>
+          ) : (
+            <React.Fragment>Entrar</React.Fragment>
+          )}
         </Button>
 
         <Link to="/user-register" id="link-register">

@@ -1,6 +1,6 @@
 import "./index.scss";
 import axios, { AxiosError } from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { State, User } from "../../../types";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, MenuItem, TextField } from "@mui/material";
@@ -25,6 +25,7 @@ const INITIAL_VALUES_FORMDATA: User = {
 export default function UserRegisterView(): JSX.Element {
   const history = useNavigate();
   const [states, setStates] = useState<State[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<User>(INITIAL_VALUES_FORMDATA);
 
   const postUser = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -44,6 +45,8 @@ export default function UserRegisterView(): JSX.Element {
           alert("O CPF informado já está cadastrado");
         }
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -101,6 +104,7 @@ export default function UserRegisterView(): JSX.Element {
     <main>
       <form
         onSubmit={(e) => {
+          setLoading(true);
           postUser(e);
         }}
       >
@@ -229,8 +233,20 @@ export default function UserRegisterView(): JSX.Element {
           }}
         />
 
-        <Button className="botao" type="submit" variant="contained">
-          Cadastrar
+        <Button 
+          className="botao" 
+          type="submit" 
+          variant="contained"
+          disabled={loading}
+          style={{ backgroundColor: loading ? "#A603038A" : "#A60303" }}
+        >
+          {loading ? (
+            <div className="container-loader">
+              <div className="dot"></div>
+            </div>
+          ) : (
+            <React.Fragment>Cadastrar</React.Fragment>
+          )}
         </Button>
 
         <Link id="link-login" to="/">Já possui cadastro? Efetue o login aqui</Link>

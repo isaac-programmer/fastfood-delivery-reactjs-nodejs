@@ -1,6 +1,6 @@
 import "./index.scss";
 import axios, { AxiosError } from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { State, User } from "../../../types";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, MenuItem, TextField } from "@mui/material";
@@ -26,6 +26,7 @@ export default function UserUpdateView(): JSX.Element {
   const { id } = useParams();
   const history = useNavigate();
   const [states, setStates] = useState<State[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<User>(INITIAL_VALUES_FORMDATA);
 
   const putUser = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -37,19 +38,21 @@ export default function UserUpdateView(): JSX.Element {
 
       // Redireciona para a tela home
       history("/");
-    } catch(error: unknown) {
-      if(error instanceof AxiosError) {
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
         console.log(error);
 
-        if(error.response?.data.error === "CPF existente"){
+        if (error.response?.data.error === "CPF existente") {
           alert("O CPF informado já está cadastrado");
         }
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    if(formData.cep.length === 9) {
+    if (formData.cep.length === 9) {
       const getDataByCep = async (cep: string) => {
         try {
           const { data } = await axios.get(
@@ -58,13 +61,13 @@ export default function UserUpdateView(): JSX.Element {
 
           // Caso o CEP não exista, a API retorna 200 porém com um objeto contendo
           // um atributo 'erro' com valor 'true'.
-          if(!data.erro && data.erro !== true) {
+          if (!data.erro && data.erro !== true) {
             setFormData({
               ...formData,
               city: data.localidade,
               state: data.uf,
               address: data.logradouro,
-              bairro: data.bairro
+              bairro: data.bairro,
             });
           } else {
             alert("CEP inválido");
@@ -82,17 +85,17 @@ export default function UserUpdateView(): JSX.Element {
   }, [formData.cep]);
 
   useEffect(() => {
-    if(id && id != "") {
+    if (id && id != "") {
       const getUserById = async () => {
         try {
           const { data } = await axios.get(`http://localhost:5000/user/${id}`);
           setFormData(data);
-        } catch(error) {
+        } catch (error) {
           console.log(error);
           alert("Usuário não encontrado");
         }
-      }
-  
+      };
+
       getUserById();
     }
   }, [id]);
@@ -116,9 +119,10 @@ export default function UserUpdateView(): JSX.Element {
   return (
     <main>
       <Link to="/">Voltar</Link>
-      
+
       <form
         onSubmit={(e) => {
+          setLoading(true);
           putUser(e);
         }}
       >
@@ -247,8 +251,20 @@ export default function UserUpdateView(): JSX.Element {
           }}
         />
 
-        <Button className="botao" type="submit" variant="contained">
-          Atualizar
+        <Button
+          className="botao"
+          type="submit"
+          variant="contained"
+          disabled={loading}
+          style={{ backgroundColor: loading ? "#A603038A" : "#A60303" }}
+        >
+          {loading ? (
+            <div className="container-loader">
+              <div className="dot"></div>
+            </div>
+          ) : (
+            <React.Fragment>Atualizar</React.Fragment>
+          )}
         </Button>
       </form>
     </main>
