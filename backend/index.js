@@ -94,8 +94,8 @@ app.put("/user/:id", (req, res) => {
 
 // Rota para deletar um usuário
 app.delete("/user/:id", (req, res) => {
-  const userId = parseInt(req.params.id);
-  users = users.filter((user) => user.id !== userId);
+  const { id } = req.params;
+  users = users.filter((user) => user.id !== parseInt(id));
   console.log(users);
   res.status(200).json({ message: "Usuário deletado com sucesso" });
 });
