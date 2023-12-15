@@ -10,11 +10,12 @@ import Footer from "../../../components/Footer";
 import TableBody from "@mui/material/TableBody";
 import TableHead from "@mui/material/TableHead";
 import { Delete, Edit } from "@mui/icons-material";
-import { IconButton, Tooltip } from "@mui/material";
+import { CircularProgress, IconButton, Tooltip } from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import React, { useEffect, useState } from "react";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { useNavigate } from "react-router-dom";
+import NoContent from "../../../components/NoContent";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,6 +41,7 @@ export default function HomeAdminView(): JSX.Element {
   const history = useNavigate();
   const [users, setUsers] = useState<User[]>([]);
   const [reload, setReload] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const getUsers = async () => {
     try {
@@ -47,6 +49,8 @@ export default function HomeAdminView(): JSX.Element {
       setUsers(data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -73,82 +77,90 @@ export default function HomeAdminView(): JSX.Element {
         <section id="users">
           <h1>Lista de Usuários</h1>
 
-          <TableContainer component={Paper} id="users-table">
-            <Table aria-label="customized table">
-              <TableHead>
-                <StyledTableRow>
-                  <StyledTableCell align="center">Usuário</StyledTableCell>
-                  <StyledTableCell align="center">Nome</StyledTableCell>
-                  <StyledTableCell align="center">Telefone</StyledTableCell>
-                  <StyledTableCell align="center">Email</StyledTableCell>
-                  <StyledTableCell align="center">
-                    Cidade/Estado
-                  </StyledTableCell>
-                  <StyledTableCell align="center">Endereço</StyledTableCell>
-                  <StyledTableCell align="center">Ações</StyledTableCell>
-                </StyledTableRow>
-              </TableHead>
-              <TableBody>
-                {users.map((user: User, index: number) =>
-                  // Será exibido apenas os usuários clientes
-                  user.role != "admin" ? (
-                    <StyledTableRow
-                      key={index}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <StyledTableCell
-                        component="th"
-                        scope="row"
-                        align="center"
+          {loading ? (
+            <CircularProgress />
+          ) : users.length > 0 ? (
+            <TableContainer component={Paper} id="users-table">
+              <Table aria-label="customized table">
+                <TableHead>
+                  <StyledTableRow>
+                    <StyledTableCell align="center">Usuário</StyledTableCell>
+                    <StyledTableCell align="center">Nome</StyledTableCell>
+                    <StyledTableCell align="center">Telefone</StyledTableCell>
+                    <StyledTableCell align="center">Email</StyledTableCell>
+                    <StyledTableCell align="center">
+                      Cidade/Estado
+                    </StyledTableCell>
+                    <StyledTableCell align="center">Endereço</StyledTableCell>
+                    <StyledTableCell align="center">Ações</StyledTableCell>
+                  </StyledTableRow>
+                </TableHead>
+                <TableBody>
+                  {users.map((user: User, index: number) =>
+                    // Será exibido apenas os usuários clientes
+                    user.role != "admin" ? (
+                      <StyledTableRow
+                        key={index}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
                       >
-                        {user.id}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {user.name}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {user.phone}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {user.email}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {user.city + "/" + user.state}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {user.address}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        <Tooltip
-                          title="Alterar Usuário"
-                          onClick={() => {
-                            history(`/user-update/${user.id}`);
-                          }}
+                        <StyledTableCell
+                          component="th"
+                          scope="row"
+                          align="center"
                         >
-                          <IconButton>
-                            <Edit />
-                          </IconButton>
-                        </Tooltip>
+                          {user.id}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {user.name}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {user.phone}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {user.email}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {user.city + "/" + user.state}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {user.address}
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          <Tooltip
+                            title="Alterar Usuário"
+                            onClick={() => {
+                              history(`/user-update/${user.id}`);
+                            }}
+                          >
+                            <IconButton>
+                              <Edit />
+                            </IconButton>
+                          </Tooltip>
 
-                        <Tooltip
-                          title="Deletar Usuário"
-                          onClick={() => {
-                            deleteUser(user.id);
-                          }}
-                        >
-                          <IconButton>
-                            <Delete />
-                          </IconButton>
-                        </Tooltip>
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  ) : (
-                    <></>
-                  )
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                          <Tooltip
+                            title="Deletar Usuário"
+                            onClick={() => {
+                              deleteUser(user.id);
+                            }}
+                          >
+                            <IconButton>
+                              <Delete />
+                            </IconButton>
+                          </Tooltip>
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    ) : (
+                      <></>
+                    )
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          ) : (
+            <NoContent />
+          )}
         </section>
       </main>
 

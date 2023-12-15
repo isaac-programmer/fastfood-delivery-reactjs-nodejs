@@ -8,6 +8,7 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
+  CircularProgress,
   IconButton,
   Typography,
 } from "@mui/material";
@@ -15,9 +16,11 @@ import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { Product } from "../../../types";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
+import NoContent from "../../../components/NoContent";
 
 export default function HomeView(): JSX.Element {
   const carousel = useRef<null | HTMLDivElement>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const [products, setProducts] = useState<Product[]>([]);
 
   const images = [
@@ -51,6 +54,8 @@ export default function HomeView(): JSX.Element {
         setProducts(result.data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -92,30 +97,39 @@ export default function HomeView(): JSX.Element {
               </IconButton>
             </div>
           </section>
-
-          <article id="container-carousel">
-            <div id="carousel" ref={carousel}>
-              {products.map((product: Product, index: number) => (
-                <Card key={index} sx={{ maxWidth: 300 }} className="card">
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      image={`public/${product.img}`}
-                      alt="green iguana"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        {product.name}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        R$ {product.price}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              ))}
-            </div>
-          </article>
+          
+          { loading ? (
+              <CircularProgress />
+            ) : (
+              products.length > 0 ? (
+                <article id="container-carousel">
+                  <div id="carousel" ref={carousel}>
+                    {products.map((product: Product, index: number) => (
+                      <Card key={index} sx={{ maxWidth: 300 }} className="card">
+                        <CardActionArea>
+                          <CardMedia
+                            component="img"
+                            image={`public/${product.img}`}
+                            alt="green iguana"
+                          />
+                          <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                              {product.name}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              R$ {product.price}
+                            </Typography>
+                          </CardContent>
+                        </CardActionArea>
+                      </Card>
+                    ))}
+                  </div>
+                </article>
+              ) : (
+                <NoContent />
+              )
+            )
+          }
         </section>
       </main>
 
