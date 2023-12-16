@@ -1,22 +1,22 @@
+import React, { useEffect, useRef, useState } from "react";
 import "./index.scss";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import { EffectFade } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Card,
   CardActionArea,
   CardContent,
   CardMedia,
-  CircularProgress,
   IconButton,
   Typography,
 } from "@mui/material";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { Product } from "../../../types";
+import { EffectFade } from "swiper/modules";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
+import { Swiper, SwiperSlide } from "swiper/react";
+import Progress from "../../../components/Progress";
 import NoContent from "../../../components/NoContent";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 
 export default function HomeView(): JSX.Element {
   const carousel = useRef<null | HTMLDivElement>(null);
@@ -99,7 +99,7 @@ export default function HomeView(): JSX.Element {
           </section>
           
           { loading ? (
-              <CircularProgress />
+              <Progress />
             ) : (
               products.length > 0 ? (
                 <article id="container-carousel">

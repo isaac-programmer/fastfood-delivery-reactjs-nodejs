@@ -10,12 +10,13 @@ import Footer from "../../../components/Footer";
 import TableBody from "@mui/material/TableBody";
 import TableHead from "@mui/material/TableHead";
 import { Delete, Edit } from "@mui/icons-material";
-import { CircularProgress, IconButton, Tooltip } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import React, { useEffect, useState } from "react";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { useNavigate } from "react-router-dom";
 import NoContent from "../../../components/NoContent";
+import Progress from "../../../components/Progress";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -78,7 +79,7 @@ export default function HomeAdminView(): JSX.Element {
           <h1>Lista de Usuários</h1>
 
           {loading ? (
-            <CircularProgress />
+            <Progress />
           ) : users.length > 0 ? (
             <TableContainer component={Paper} id="users-table">
               <Table aria-label="customized table">
