@@ -41,6 +41,7 @@ export type User = {
 export type AuthContextType = {
     userRole: string;
     userSigned: boolean;
+    logout: () => void;
     setUserRole: Dispatch<SetStateAction<string>>;
     setUserSigned: Dispatch<SetStateAction<boolean>>;
 }

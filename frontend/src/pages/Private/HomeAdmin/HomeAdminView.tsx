@@ -153,7 +153,7 @@ export default function HomeAdminView(): JSX.Element {
                         </StyledTableCell>
                       </StyledTableRow>
                     ) : (
-                      <></>
+                      <React.Fragment key={index}></React.Fragment>
                     )
                   )}
                 </TableBody>

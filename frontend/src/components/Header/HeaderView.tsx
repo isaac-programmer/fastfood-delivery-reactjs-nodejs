@@ -1,11 +1,11 @@
 import "./index.scss";
-import { Badge, IconButton } from "@mui/material";
-import { ShoppingCart } from "@mui/icons-material";
+import { Badge, IconButton, Tooltip } from "@mui/material";
+import { Logout, ShoppingCart } from "@mui/icons-material";
 import useAuthContext from "../../context/Auth/hook";
 import { Link } from "react-router-dom";
 
 export default function HeaderView(): JSX.Element {
-  const { userRole } = useAuthContext();
+  const { userRole, logout } = useAuthContext();
 
   return (
     <header>
@@ -27,15 +27,29 @@ export default function HeaderView(): JSX.Element {
         </ul>
       </nav>
 
-      {userRole != "admin" ? (
-        <IconButton>
-          <Badge badgeContent={4} color="warning">
-            <ShoppingCart sx={{ color: "#59320F" }} />
-          </Badge>
-        </IconButton>
-      ) : (
-        <></>
-      )}
+      <div id="icons-header">
+        {userRole != "admin" ? (
+          <IconButton>
+            <Badge badgeContent={4} color="warning">
+              <ShoppingCart sx={{ color: "#59320F" }} />
+            </Badge>
+          </IconButton>
+        ) : (
+          <></>
+        )}
+
+        <Tooltip
+          title="Sair"
+          placement="bottom"
+          onClick={() => {
+            logout();
+          }}
+        >
+          <IconButton>
+            <Logout sx={{ color: "#59320F" }} />
+          </IconButton>
+        </Tooltip>
+      </div>
     </header>
   );
 }

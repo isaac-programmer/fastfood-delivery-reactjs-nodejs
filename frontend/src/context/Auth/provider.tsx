@@ -2,8 +2,9 @@ import { createContext, useEffect, useState } from "react";
 import { AuthContextProps, AuthContextType } from "../../types";
 
 const INITIAL_VALUES_AUTHCONTEXT = {
-    userSigned: false,
     userRole: "",
+    userSigned: false,
+    logout: () => {},
     setUserRole: () => {},
     setUserSigned: () => {}
 }
@@ -13,6 +14,12 @@ export const AuthContext = createContext<AuthContextType>(INITIAL_VALUES_AUTHCON
 export default function AuthProvider({ children }: AuthContextProps) {
     const [userRole, setUserRole] = useState<string>(INITIAL_VALUES_AUTHCONTEXT.userRole);
     const [userSigned, setUserSigned] = useState<boolean>(INITIAL_VALUES_AUTHCONTEXT.userSigned);
+
+    const logout = () => {
+        setUserRole("");
+        setUserSigned(false);
+        sessionStorage.clear();
+    }
 
     // Garante que ao recarregar a página diretamente pelo navegador,
     // os estados do contexto permanecerão inalterados.
@@ -32,7 +39,8 @@ export default function AuthProvider({ children }: AuthContextProps) {
                 userRole,
                 userSigned,
                 setUserRole,
-                setUserSigned
+                setUserSigned,
+                logout,
             }}
         >
             {children}
