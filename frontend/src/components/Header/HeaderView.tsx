@@ -1,11 +1,13 @@
 import "./index.scss";
-import { Badge, IconButton, Tooltip } from "@mui/material";
-import { Logout, ShoppingCart } from "@mui/icons-material";
-import useAuthContext from "../../context/Auth/hook";
 import { Link } from "react-router-dom";
+import useAuthContext from "../../context/Auth/hook";
+import { Logout, ShoppingCart } from "@mui/icons-material";
+import { Badge, IconButton, Tooltip } from "@mui/material";
+import useShoppingCartContext from "../../context/ShoppingCart/hook";
 
 export default function HeaderView(): JSX.Element {
   const { userRole, logout } = useAuthContext();
+  const { qtdProductsInCart } = useShoppingCartContext();
 
   return (
     <header>
@@ -30,7 +32,7 @@ export default function HeaderView(): JSX.Element {
       <div id="icons-header">
         {userRole != "admin" ? (
           <IconButton>
-            <Badge badgeContent={4} color="warning">
+            <Badge badgeContent={qtdProductsInCart} color="warning">
               <ShoppingCart sx={{ color: "#59320F" }} />
             </Badge>
           </IconButton>

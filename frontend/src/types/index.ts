@@ -49,3 +49,12 @@ export type AuthContextType = {
 export type AuthContextProps = {
     children: ReactNode;
 }
+
+export type ShoppingCartContextType = {
+    qtdProductsInCart: number;
+    insertProductsInCart: () => void;
+}
+
+export type ShoppingCartContextProps = {
+    children: ReactNode;
+}

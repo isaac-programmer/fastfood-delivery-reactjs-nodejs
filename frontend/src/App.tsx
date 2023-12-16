@@ -11,14 +11,17 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import 'swiper/css/effect-fade';
 import AuthProvider from "./context/Auth/provider";
+import ShoppingCartProvider from "./context/ShoppingCart/provider";
 
 function App(): JSX.Element {
   return (
     <React.Fragment>
       <AuthProvider>
-        <BrowserRouter>
-          <Rotas />
-        </BrowserRouter>
+        <ShoppingCartProvider>
+          <BrowserRouter>
+            <Rotas />
+          </BrowserRouter>
+        </ShoppingCartProvider>
       </AuthProvider>
     </React.Fragment>
   );
