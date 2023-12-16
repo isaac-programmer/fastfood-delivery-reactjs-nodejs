@@ -117,7 +117,7 @@ export default function UserUpdateView(): JSX.Element {
   }, []);
 
   return (
-    <main>
+    <main id="user-update">
       <Link to="/">Voltar</Link>
 
       <form

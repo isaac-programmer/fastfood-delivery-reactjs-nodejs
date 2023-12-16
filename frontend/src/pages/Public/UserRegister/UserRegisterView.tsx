@@ -101,7 +101,7 @@ export default function UserRegisterView(): JSX.Element {
   }, []);
 
   return (
-    <main>
+    <main id="user-register">
       <form
         onSubmit={(e) => {
           setLoading(true);

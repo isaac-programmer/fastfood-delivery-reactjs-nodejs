@@ -68,7 +68,7 @@ export default function HomeView(): JSX.Element {
     <React.Fragment>
       <Header />
 
-      <main>
+      <main id="home">
         <section id="banners">
           <Swiper
             modules={[EffectFade]}
