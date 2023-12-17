@@ -110,7 +110,7 @@ export default function HomeAdminView(): JSX.Element {
                           <Tooltip
                             title="Alterar Usuário"
                             onClick={() => {
-                              history(`/user-update/${user.id}`);
+                              history(`/user-update/${btoa(String(user.id))}`);
                             }}
                           >
                             <IconButton>
