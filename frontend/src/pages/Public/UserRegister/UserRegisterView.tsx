@@ -1,12 +1,12 @@
 import "./index.scss";
-import React, { useEffect, useState } from "react";
 import { State, User } from "../../../types";
+import { postUser } from "../../../services/User";
+import React, { useEffect, useState } from "react";
+import { getDataByCep } from "../../../services/CEP";
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, MenuItem, TextField } from "@mui/material";
-import { formatarCEP, formatarCPF, formatarPhone } from "../../../utils/masks";
-import { getDataByCep } from "../../../services/CEP";
 import { getStatesOrderByName } from "../../../services/ServicoDadosIBGE";
-import { postUser } from "../../../services/User";
+import { formatarCEP, formatarCPF, formatarPhone } from "../../../utils/masks";
 
 const INITIAL_VALUES_FORMDATA: User = {
   id: 0,
@@ -44,6 +44,10 @@ export default function UserRegisterView(): JSX.Element {
 
   return (
     <main id="user-register">
+      <section className="side-image">
+        <img id="image" src="public/home-delivery-service.svg" />
+      </section>
+
       <form
         onSubmit={(e) => {
           setLoading(true);

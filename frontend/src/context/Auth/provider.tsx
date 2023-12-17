@@ -19,6 +19,7 @@ export default function AuthProvider({ children }: AuthContextProps) {
         setUserRole("");
         setUserSigned(false);
         sessionStorage.clear();
+        window.location.href = "/";
     }
 
     // Garante que ao recarregar a página diretamente pelo navegador,
