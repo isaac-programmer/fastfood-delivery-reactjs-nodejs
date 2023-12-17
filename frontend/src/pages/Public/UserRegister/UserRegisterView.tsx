@@ -31,16 +31,16 @@ export default function UserRegisterView(): JSX.Element {
   const [formData, setFormData] = useState<User>(INITIAL_VALUES_FORMDATA);
 
   useEffect(() => {
+    getStatesOrderByName(setStates);
+  }, []);
+
+  useEffect(() => {
     if(formData.cep.length === 9) {
       const cepOnlyNumbers = formData.cep.replace("-", "");
       getDataByCep(cepOnlyNumbers, formData, setFormData);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.cep]);
-
-  useEffect(() => {
-    getStatesOrderByName(setStates);
-  }, []);
 
   return (
     <main id="user-register">
@@ -52,7 +52,7 @@ export default function UserRegisterView(): JSX.Element {
       >
         <h1>Cadastro de Usuário</h1>
         
-        <section id="form-container">
+        <section className="form-container">
           <Box className="division">
             <TextField
               required

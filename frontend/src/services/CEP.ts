@@ -16,10 +16,10 @@ export const getDataByCep = async (
     if (!data.erro && data.erro !== true) {
       setFormData({
         ...formData,
-        city: data.localidade,
-        state: data.uf,
-        address: data.logradouro,
-        bairro: data.bairro,
+        city: formData.city === "" ? data.localidade : formData.city,
+        state: formData.state === "" ? data.uf : formData.state,
+        address: formData.address === "" ? data.logradouro : formData.address,
+        bairro: formData.bairro === "" ? data.bairro : formData.bairro,
       });
     } else {
       alert("CEP inválido");
