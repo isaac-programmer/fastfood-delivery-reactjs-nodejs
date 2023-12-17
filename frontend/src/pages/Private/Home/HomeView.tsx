@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./index.scss";
-import axios from "axios";
 import {
   Box,
   Card,
@@ -16,6 +15,7 @@ import Footer from "../../../components/Footer";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Progress from "../../../components/Progress";
 import NoContent from "../../../components/NoContent";
+import { getProducts } from "../../../services/Products";
 import useShoppingCartContext from "../../../context/ShoppingCart/hook";
 import { AddShoppingCart, ArrowBack, ArrowForward } from "@mui/icons-material";
 
@@ -48,20 +48,7 @@ export default function HomeView(): JSX.Element {
   };
 
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const result = await axios.get<Product[]>(
-          "http://localhost:5000/products"
-        );
-        setProducts(result.data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getProducts();
+    getProducts(setLoading, setProducts);
   }, []);
 
   return (

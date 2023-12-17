@@ -1,9 +1,11 @@
 import "./index.scss";
-import axios, { AxiosError } from "axios";
-import React, { useEffect, useState } from "react";
 import { State, User } from "../../../types";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { getDataByCep } from "../../../services/CEP";
 import { Button, MenuItem, TextField } from "@mui/material";
+import { getUserById, putUser } from "../../../services/User";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { getStatesOrderByName } from "../../../services/ServicoDadosIBGE";
 import { formatarCEP, formatarCPF, formatarPhone } from "../../../utils/masks";
 
 const INITIAL_VALUES_FORMDATA: User = {
@@ -29,91 +31,22 @@ export default function UserUpdateView(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<User>(INITIAL_VALUES_FORMDATA);
 
-  const putUser = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    try {
-      await axios.put(`http://localhost:5000/user/${id}`, formData);
-      alert("Usuário atualizado com sucesso!");
-
-      // Redireciona para a tela home
-      history("/");
-    } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        console.log(error);
-
-        if (error.response?.data.error === "CPF existente") {
-          alert("O CPF informado já está cadastrado");
-        }
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    if (formData.cep.length === 9) {
-      const getDataByCep = async (cep: string) => {
-        try {
-          const { data } = await axios.get(
-            `https://viacep.com.br/ws/${cep}/json/`
-          );
-
-          // Caso o CEP não exista, a API retorna 200 porém com um objeto contendo
-          // um atributo 'erro' com valor 'true'.
-          if (!data.erro && data.erro !== true) {
-            setFormData({
-              ...formData,
-              city: data.localidade,
-              state: data.uf,
-              address: data.logradouro,
-              bairro: data.bairro,
-            });
-          } else {
-            alert("CEP inválido");
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
+    if(formData.cep.length === 9) {
       const cepOnlyNumbers = formData.cep.replace("-", "");
-      getDataByCep(cepOnlyNumbers);
+      getDataByCep(cepOnlyNumbers, formData, setFormData);
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.cep]);
 
   useEffect(() => {
-    if (id && id != "") {
-      const getUserById = async () => {
-        try {
-          const { data } = await axios.get(`http://localhost:5000/user/${id}`);
-          setFormData(data);
-        } catch (error) {
-          console.log(error);
-          alert("Usuário não encontrado");
-        }
-      };
-
-      getUserById();
+    if(id && id != "") {
+      getUserById(id, setFormData);
     }
   }, [id]);
 
   useEffect(() => {
-    const getStatesOrderByName = async () => {
-      try {
-        const result = await axios.get(
-          "https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome"
-        );
-
-        setStates(result.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getStatesOrderByName();
+    getStatesOrderByName(setStates);
   }, []);
 
   return (
@@ -123,7 +56,7 @@ export default function UserUpdateView(): JSX.Element {
       <form
         onSubmit={(e) => {
           setLoading(true);
-          putUser(e);
+          putUser(id ?? "0", formData, history, e, setLoading);
         }}
       >
         <h1>Atualização de Usuário</h1>

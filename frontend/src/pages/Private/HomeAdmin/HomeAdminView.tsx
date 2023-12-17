@@ -1,22 +1,22 @@
 import "./index.scss";
-import axios from "axios";
 import { User } from "../../../types";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import { styled } from "@mui/material/styles";
 import TableRow from "@mui/material/TableRow";
+import { useNavigate } from "react-router-dom";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import TableBody from "@mui/material/TableBody";
 import TableHead from "@mui/material/TableHead";
+import React, { useEffect, useState } from "react";
 import { Delete, Edit } from "@mui/icons-material";
 import { IconButton, Tooltip } from "@mui/material";
-import TableContainer from "@mui/material/TableContainer";
-import React, { useEffect, useState } from "react";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import { useNavigate } from "react-router-dom";
-import NoContent from "../../../components/NoContent";
 import Progress from "../../../components/Progress";
+import NoContent from "../../../components/NoContent";
+import TableContainer from "@mui/material/TableContainer";
+import { deleteUser, getUsers } from "../../../services/User";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -44,30 +44,8 @@ export default function HomeAdminView(): JSX.Element {
   const [reload, setReload] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const getUsers = async () => {
-    try {
-      const { data } = await axios.get("http://localhost:5000/users");
-      setUsers(data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const deleteUser = async (idUser: number) => {
-    try {
-      await axios.delete(`http://localhost:5000/user/${idUser}`);
-      alert("Usuário deletado com sucesso!");
-      setReload(!reload);
-    } catch (error) {
-      console.log(error);
-      alert("Erro ao deletar usuário!");
-    }
-  };
-
   useEffect(() => {
-    getUsers();
+    getUsers(setUsers, setLoading);
   }, [reload]);
 
   return (
@@ -143,7 +121,7 @@ export default function HomeAdminView(): JSX.Element {
                           <Tooltip
                             title="Deletar Usuário"
                             onClick={() => {
-                              deleteUser(user.id);
+                              deleteUser(user.id, reload, setReload);
                             }}
                           >
                             <IconButton>
