@@ -26,11 +26,11 @@ export default function HomeView(): JSX.Element {
   const { insertProductsInCart } = useShoppingCartContext();
 
   const images = [
-    "public/banner-01.jpg",
-    "public/banner-02.jpg",
-    "public/banner-03.jpg",
-    "public/banner-04.jpg",
-    "public/banner-05.jpg",
+    "public/banners/banner-01.jpg",
+    "public/banners/banner-02.jpg",
+    "public/banners/banner-03.jpg",
+    "public/banners/banner-04.jpg",
+    "public/banners/banner-05.jpg",
   ];
 
   const handleLeftClick = (e: React.MouseEvent<HTMLButtonElement>) => {
