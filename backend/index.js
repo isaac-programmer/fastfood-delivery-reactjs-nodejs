@@ -32,11 +32,11 @@ let users = [{
 }];
 
 let products = [
-  { id: 1, name: "Hambúrguer", price: "20,00", img: "banner-01.jpg" },
-  { id: 2, name: "Pizza", price: "40,00", img: "banner-02.jpg" },
-  { id: 3, name: "Batatas", price: "6,00", img: "banner-03.jpg" },
-  { id: 4, name: "Refrigerante", price: "4,00", img: "banner-04.jpg" },
-  { id: 5, name: "Suco", price: "2,50", img: "banner-05.jpg" },
+  { id: 1, name: "Hambúrguer", price: "20,00", img: "hamburguer.jpg" },
+  { id: 2, name: "Pizza", price: "40,00", img: "pizza.jpg" },
+  { id: 3, name: "Batata Frita", price: "6,00", img: "batata-frita.jpg" },
+  { id: 4, name: "Refrigerante", price: "4,00", img: "refrigerante.jpg" },
+  { id: 5, name: "Suco", price: "2,50", img: "suco.jpg" },
 ];
 
 // Rota para obter todos os usuários

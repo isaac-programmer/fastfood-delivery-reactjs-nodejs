@@ -1,9 +1,14 @@
 header {
-    padding: 30px;
-    min-height: 5vh;
+    position: fixed;
+    top: 0px;
+    z-index: 2;
+    width: 100%;
+    padding: 20px;
     display: flex;
     align-items: center;
+    background-color: white;
     justify-content: space-between;
+    border-bottom: 1px solid #59320f50;
 
     nav {
         ul {
@@ -36,5 +41,40 @@ header {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+    }
+}
+
+// Media Queries
+@media screen and (max-width: 480px) {
+    header {
+        padding: 20px 15px;
+        
+        nav {
+            ul {
+                gap: 10px;
+    
+                li {
+                    font-size: 1em;
+                }
+            }
+        }
+    
+        #icons-header {
+            gap: 5px;
+        }
+    }
+}
+
+@media screen and (max-width: 320px) {
+    header {
+        nav {
+            ul {
+                li {
+                    .active {
+                        padding: 5px 10px;
+                    }
+                }
+            }
+        }
     }
 }

@@ -1,9 +1,22 @@
 footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     color: white;
     padding: 30px;
+    min-height: 10vh;
     background-color: #59320F;
 
     p {
+        font-size: 1rem;
         text-align: center;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    footer {
+        max-height: 10vh;
+        padding: 0 30px;
     }
 }

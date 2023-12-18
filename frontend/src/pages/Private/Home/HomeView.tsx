@@ -76,15 +76,19 @@ export default function HomeView(): JSX.Element {
           <section id="subtitle-buttons">
             <h2>Cardápio</h2>
 
-            <div id="buttons">
-              <IconButton className="icone" onClick={handleLeftClick}>
-                <ArrowBack />
-              </IconButton>
+            {!loading || products.length < 0 ? (
+              <div id="buttons">
+                <IconButton className="icone" onClick={handleLeftClick}>
+                  <ArrowBack />
+                </IconButton>
 
-              <IconButton className="icone" onClick={handleRightClick}>
-                <ArrowForward />
-              </IconButton>
-            </div>
+                <IconButton className="icone" onClick={handleRightClick}>
+                  <ArrowForward />
+                </IconButton>
+              </div>
+            ) : (
+              <></>
+            )}
           </section>
 
           {loading ? (
@@ -93,11 +97,11 @@ export default function HomeView(): JSX.Element {
             <article id="container-carousel">
               <div id="carousel" ref={carousel}>
                 {products.map((product: Product, index: number) => (
-                  <Card key={index} sx={{ maxWidth: 300 }} className="card">
+                  <Card key={index} className="card">
                     <CardMedia
                       component="img"
-                      image={`public/${product.img}`}
-                      alt="green iguana"
+                      image={`public/products/${product.img}`}
+                      alt={`Produto ${index}`}
                     />
                     <CardContent className="card-content">
                       <Box>
@@ -109,10 +113,12 @@ export default function HomeView(): JSX.Element {
                         </Typography>
                       </Box>
 
-                      <IconButton 
+                      <IconButton
                         size="large"
                         className="card-icon"
-                        onClick={() => { insertProductsInCart() }} 
+                        onClick={() => {
+                          insertProductsInCart();
+                        }}
                       >
                         <AddShoppingCart />
                       </IconButton>

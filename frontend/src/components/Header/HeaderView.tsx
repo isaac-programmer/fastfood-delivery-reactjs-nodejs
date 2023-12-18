@@ -1,8 +1,8 @@
 import "./index.scss";
 import { Link } from "react-router-dom";
 import useAuthContext from "../../context/Auth/hook";
-import { Logout, ShoppingCart } from "@mui/icons-material";
 import { Badge, IconButton, Tooltip } from "@mui/material";
+import { Logout, ShoppingCart } from "@mui/icons-material";
 import useShoppingCartContext from "../../context/ShoppingCart/hook";
 
 export default function HeaderView(): JSX.Element {
