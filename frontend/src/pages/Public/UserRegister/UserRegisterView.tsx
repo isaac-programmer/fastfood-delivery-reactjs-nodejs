@@ -10,7 +10,7 @@ import { formatarCEP, formatarCPF, formatarPhone } from "../../../utils/masks";
 
 const INITIAL_VALUES_FORMDATA: User = {
   id: 0,
-  role: "client",
+  role: "",
   cpf: "",
   name: "",
   email: "",
@@ -35,7 +35,7 @@ export default function UserRegisterView(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    if(formData.cep.length === 9) {
+    if (formData.cep.length === 9) {
       const cepOnlyNumbers = formData.cep.replace("-", "");
       getDataByCep(cepOnlyNumbers, formData, setFormData);
     }
@@ -55,7 +55,7 @@ export default function UserRegisterView(): JSX.Element {
         }}
       >
         <h1>Cadastro de Usuário</h1>
-        
+
         <section className="form-container">
           <Box className="division">
             <TextField
@@ -196,6 +196,25 @@ export default function UserRegisterView(): JSX.Element {
                 setFormData({ ...formData, complement: e.target.value });
               }}
             />
+
+            <TextField
+              select
+              required
+              fullWidth
+              type="text"
+              label="Função"
+              value={formData.role}
+              onChange={(e) => {
+                setFormData({ ...formData, role: e.target.value });
+              }}
+            >
+              <MenuItem value="admin">
+                Admin
+              </MenuItem>
+              <MenuItem value="client">
+                Cliente
+              </MenuItem>
+            </TextField>
           </Box>
         </section>
 
