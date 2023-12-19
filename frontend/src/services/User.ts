@@ -40,9 +40,9 @@ export const postUser = async (
   setLoading: Dispatch<SetStateAction<boolean>>
 ) => {
   e.preventDefault();
-
+  
   try {
-    await axios.post(`http://localhost:5000/user`, formData);
+    await axios.post(`http://localhost:5000/user`, {...formData});
     alert("Usuário cadastrado com sucesso!");
 
     // Redireciona para a tela de login

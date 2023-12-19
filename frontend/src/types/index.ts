@@ -23,7 +23,7 @@ export type State = {
 }
 
 export type User = {
-    id: number;
+    id?: number;
     role: string;
     cpf: string;
     name: string;

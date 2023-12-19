@@ -3,9 +3,7 @@ import { DataSource } from "typeorm";
 import { User } from "../entities/User";
 import { Product } from "../entities/Product";
 
-console.log(process.env.MYSQL_HOST);
-
-export const AppDataDource = new DataSource({
+export const AppDataSource = new DataSource({
     type: "mysql",
     host: "db4free.net",
     port: 3306,

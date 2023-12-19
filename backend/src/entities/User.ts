@@ -14,7 +14,7 @@ export class User {
   @Column('varchar', { nullable: false, length: 200 })
   public name!: string;
 
-  @Column('varchar', { nullable: false, unique: true })
+  @Column('varchar', { nullable: false, length: 200 })
   public email!: string;
 
   @Column('char', { nullable: false, length: 15 })

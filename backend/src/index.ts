@@ -2,26 +2,25 @@ import cors from "cors";
 import 'reflect-metadata';
 import express from "express";
 import { config } from "dotenv";
-import { AppDataDource } from "./database/data-source";
+import router from "./routes/routes";
+import { AppDataSource } from "./database/data-source";
 
 config();
-
+ 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = 5000;
 
-// let qtdInsertedUsers = 1;
-
-// Habilitando o CORS
+// Configurações do CORS
 const corsOptions = {
   origin: "http://localhost:3000",
 };
 
 app.use(cors(corsOptions));
-
-// Middleware para parsear JSON do corpo da requisição
 app.use(express.json());
+app.use("/", router);
+app.use(express.urlencoded({ extended: true }));
 
-AppDataDource.initialize().then(async() => {
+AppDataSource.initialize().then(async() => {
   console.log("Database OK");
 
   app.listen(port, () => {

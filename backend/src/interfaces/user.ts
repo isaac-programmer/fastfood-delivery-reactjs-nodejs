@@ -1,5 +1,5 @@
-export interface User {
-  id: number;
+export interface IUser {
+  id?: number;
   role: string;
   cpf: string;
   name: string;
@@ -10,6 +10,6 @@ export interface User {
   city: string;
   bairro: string;
   address: string;
-  number: string;
+  number: number;
   complement: string;
 }
