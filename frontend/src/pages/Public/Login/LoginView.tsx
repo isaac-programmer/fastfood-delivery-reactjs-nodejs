@@ -57,7 +57,7 @@ export default function LoginView(): JSX.Element {
       </form>
 
       <section className="side-image">
-        <img id="image" src="public/svg/delivery-02.svg" />
+        <img className="image" src="public/svg/delivery-02.svg" />
       </section>
     </main>
   );

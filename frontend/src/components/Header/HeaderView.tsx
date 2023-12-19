@@ -21,7 +21,7 @@ export default function HeaderView(): JSX.Element {
 
           {userRole != "admin" ? (
             <li>
-              <a href="#cardapio">Cardapio</a>
+              <a href="#cardapio">Cardápio</a>
             </li>
           ) : (
             <></>

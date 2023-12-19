@@ -1,18 +1,19 @@
 main#user-update {
-    padding: 30px 0;
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 110.80px 30px 30px 30px;
 
     form {
         display: flex;
         flex-direction: column;
         gap: 30px;
-        width: 50vw;
+        width: 60%;
         padding: 30px;
-        border: 1px solid;
         border-radius: 15px;
+        border: 1px solid #59320f50;
 
         h1 {
             color: #59320F;
@@ -40,4 +41,34 @@ main#user-update {
             }
         }
     }
+}
+
+// Media Queries
+@media screen and (max-width: 1024px) {
+    main#user-update {    
+        form {
+            width: 80%;
+
+            .form-container {
+                gap: 30px;
+                flex-direction: column;
+    
+                .division {
+                    gap: 30px;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    main#user-update {
+        padding: 110.80px 20px 30px 20px;
+        flex-direction: column;
+    
+        form {    
+            width: 100%;
+        }
+    } 
 }

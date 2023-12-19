@@ -1,17 +1,23 @@
 main#user-register {
+    min-height: 100vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding: 0 30px;
 
     .side-image {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         width: 50%;
-        height: 100vh;
+        max-height: 100vh;
 
-        #image {
+        .image {
             display: inline-block;
             width: 100%;
-            height: 100%;
+            height: 90vh;
         }
     }
 
@@ -20,10 +26,9 @@ main#user-register {
         flex-direction: column;
         gap: 30px;
         width: 50%;
-        height: 70%;
         padding: 30px;
-        border: 1px solid;
         border-radius: 15px;
+        border: 1px solid #59320f50;
 
         h1 {
             color: #59320F;
@@ -60,4 +65,40 @@ main#user-register {
             }
         }
     }
+}
+
+// Media Queries
+@media screen and (max-width: 1200px) {
+    main#user-register {
+        padding: 30px 0;
+        flex-direction: column;
+    
+        .side-image {
+            display: none;
+        }
+    
+        form {    
+            width: 80%;
+
+            .form-container {
+                gap: 30px;
+                flex-direction: column;
+    
+                .division {
+                    gap: 30px;
+                    width: 100%;
+                }
+            }
+        }
+    } 
+}
+
+@media screen and (max-width: 480px) {
+    main#user-register {
+        padding: 30px 20px;
+    
+        form {    
+            width: 100%;
+        }
+    } 
 }

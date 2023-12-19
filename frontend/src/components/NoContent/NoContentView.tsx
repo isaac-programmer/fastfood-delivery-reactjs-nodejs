@@ -5,7 +5,7 @@ export default function NoContentView(): JSX.Element {
 
   return (
     <section id="no-content">
-      <Typography>
+      <Typography component="p">
         Nenhum conteúdo encontrado!
       </Typography>
     </section>

@@ -1,5 +1,4 @@
 #no-content {
-    border: 1px solid black;
     width: 100%;
     height: 30vh;
     display: flex;
@@ -7,4 +6,11 @@
     align-items: center;
     justify-content: center;
     border-radius: 15px;
+    border: 1px solid #59320f50;
+
+    p {
+        color: #59320F;
+        font-size: 1.2rem;
+        text-align: center;
+    }
 }

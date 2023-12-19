@@ -9,17 +9,33 @@ import "swiper/css/scrollbar";
 import 'swiper/css/effect-fade';
 import AuthProvider from "./context/Auth/provider";
 import ShoppingCartProvider from "./context/ShoppingCart/provider";
+import { ThemeProvider, createTheme } from "@mui/material";
 
 register();
+
+// Configuração do tema do projeto
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#A60303",
+    },
+    secondary: {
+      main: "#59320F",
+    },
+  },
+
+});
 
 function App(): JSX.Element {
   return (
     <React.Fragment>
       <AuthProvider>
         <ShoppingCartProvider>
-          <BrowserRouter>
-            <Rotas />
-          </BrowserRouter>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <Rotas />
+            </BrowserRouter>
+          </ThemeProvider>
         </ShoppingCartProvider>
       </AuthProvider>
     </React.Fragment>

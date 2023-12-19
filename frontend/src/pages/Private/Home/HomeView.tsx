@@ -76,7 +76,7 @@ export default function HomeView(): JSX.Element {
           <section id="subtitle-buttons">
             <h2>Cardápio</h2>
 
-            {!loading || products.length < 0 ? (
+            {!loading && products.length > 0 ? (
               <div id="buttons">
                 <IconButton className="icone" onClick={handleLeftClick}>
                   <ArrowBack />
