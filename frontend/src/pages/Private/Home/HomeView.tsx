@@ -26,11 +26,11 @@ export default function HomeView(): JSX.Element {
   const { insertProductsInCart } = useShoppingCartContext();
 
   const images = [
-    "public/banners/banner-01.jpg",
-    "public/banners/banner-02.jpg",
-    "public/banners/banner-03.jpg",
-    "public/banners/banner-04.jpg",
-    "public/banners/banner-05.jpg",
+    "/banners/banner-01.jpg",
+    "/banners/banner-02.jpg",
+    "/banners/banner-03.jpg",
+    "/banners/banner-04.jpg",
+    "/banners/banner-05.jpg",
   ];
 
   const handleLeftClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -100,7 +100,7 @@ export default function HomeView(): JSX.Element {
                   <Card key={index} className="card">
                     <CardMedia
                       component="img"
-                      image={`public/products/${product.img}`}
+                      image={`/products/${product.img}`}
                       alt={`Produto ${index}`}
                     />
                     <CardContent className="card-content">

@@ -45,7 +45,7 @@ export default function UserRegisterView(): JSX.Element {
   return (
     <main id="user-register">
       <section className="side-image">
-        <img className="image" src="public/svg/delivery-01.svg" />
+        <img className="image" src="/svg/delivery-01.svg" />
       </section>
 
       <form
