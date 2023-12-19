@@ -1,8 +1,8 @@
-import express from "express";
 import cors from "cors";
+import 'reflect-metadata';
+import express from "express";
 import { config } from "dotenv";
-import { MySQLGetUsersRepository } from "./repositories/get-users/mysql-get-users";
-import { GetUsersController } from "./controllers/get-users/get-users";
+import { AppDataDource } from "./database/data-source";
 
 config();
 
@@ -21,17 +21,10 @@ app.use(cors(corsOptions));
 // Middleware para parsear JSON do corpo da requisição
 app.use(express.json());
 
-// Rota para obter todos os usuários
-app.get("/users", async (req, res) => {
-  const mysqlGetUsersRepository = new MySQLGetUsersRepository();
+AppDataDource.initialize().then(async() => {
+  console.log("Database OK");
 
-  const getUsersController = new GetUsersController(mysqlGetUsersRepository);
-
-  const { statusCode, body } = await getUsersController.handle();
-
-  res.send(body).status(statusCode);
-});
-
-app.listen(port, () => {
-  console.log(`App escutando na porta ${port}`);
+  app.listen(port, () => {
+    console.log(`App escutando na porta ${port}`);
+  });
 });
