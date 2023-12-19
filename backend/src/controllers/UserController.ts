@@ -21,7 +21,7 @@ export class UserController {
 
       res.status(200).json(user);
     } catch (error) {
-      res.status(404).json({ error: "User not found" });
+      res.status(404).json({ error: "Usuário não encontrado" });
     }
   }
 

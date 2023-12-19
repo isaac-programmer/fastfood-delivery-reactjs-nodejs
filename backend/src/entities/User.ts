@@ -8,7 +8,7 @@ export class User {
   @Column('varchar', { nullable: false, length: 6 })
   public role!: string;
 
-  @Column('char', { nullable: false, length: 14 })
+  @Column('char', { nullable: false, length: 14, unique: true })
   public cpf!: string;
 
   @Column('varchar', { nullable: false, length: 200 })
