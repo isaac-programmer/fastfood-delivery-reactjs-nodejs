@@ -8,8 +8,8 @@ export class Product {
   @Column('varchar', { nullable: false, length: 200 })
   public name!: string;
 
-  @Column({ nullable: false })
-  public price!: number;
+  @Column('varchar', { nullable: false, length: 12 })
+  public price!: string;
 
   @Column('varchar', { nullable: false, length: 200 })
   public img!: string;

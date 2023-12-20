@@ -8,8 +8,6 @@ export class LoginController {
     const cpf = req.body.cpf;
     const userRepository = AppDataSource.getRepository(User);
 
-    console.log(cpf);
-
     try {
       const user = await userRepository.findOneByOrFail({ cpf: cpf });
       res.status(200).json(user);
