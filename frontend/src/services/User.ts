@@ -24,7 +24,14 @@ export const getUsers = async (
 ) => {
   try {
     const { data } = await axios.get("http://localhost:5000/users");
-    setUsers(data);
+
+    const userRoleSigned = sessionStorage.getItem("userRole");
+
+    if(userRoleSigned && userRoleSigned === "admin") {
+      setUsers(data.filter((user: User) => { return user.role === "client" }));
+    } else {
+      setUsers(data);
+    }
   } catch (error) {
     console.log(error);
   } finally {
