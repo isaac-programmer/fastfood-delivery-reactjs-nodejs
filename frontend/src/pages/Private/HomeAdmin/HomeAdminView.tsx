@@ -121,7 +121,7 @@ export default function HomeAdminView(): JSX.Element {
                           <Tooltip
                             title="Deletar Usuário"
                             onClick={() => {
-                              deleteUser(user.id, reload, setReload);
+                              deleteUser(Number(user.id), reload, setReload);
                             }}
                           >
                             <IconButton>
