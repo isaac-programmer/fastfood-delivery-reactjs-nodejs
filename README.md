@@ -4,11 +4,11 @@ O projeto consiste numa aplicação web com o objetivo de digitalizar o negócio
 
 ### ⚙️ Pré-requisitos
 
-Para que o projeto funcione normalmente, será preciso ter instalado em sua máquina o NodeJS, na versão 16.16.0.
+Para que o projeto funcione normalmente, será preciso ter instalado em sua máquina o **NodeJS**, na versão **16.16.0**
 
 ### 🔨 Guia de instalação
 
-O projeto  está separado em duas pastas: **frontend** e **backend**. Será preciso abrir cada uma das pastas separadamente em alguma IDE ou editor de código e seguir as instruções presentes nos seus respectivos **README.md**, para que os pacotes sejam corretamente instalados.
+O projeto está separado em duas pastas: **frontend** e **backend**. Será preciso abrir cada uma das pastas separadamente em alguma IDE ou editor de código e seguir as instruções presentes nos seus respectivos **README.md**, para que os pacotes sejam corretamente instalados.
 
 ## 📦 Tecnologias usadas:
 

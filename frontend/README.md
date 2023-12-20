@@ -1,30 +1,30 @@
-# Manual da Execução do Front-end
+# Manual - Execução do Front-End
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### ⚙️ Pré-requisitos
 
-Currently, two official plugins are available:
+Para que o front-end funcione normalmente, será preciso ter instalado em sua máquina o **NodeJS**, na versão **16.16.0** e que a pasta **frontend** esteja aberta na IDE ou no editor de código a ser utilizado.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 🔨 Guia de instalação
 
-## Expanding the ESLint configuration
+Considerando que os pré-requisitos foram satisfeitos, siga os passos a seguir para que a execução do front-end ocorra corretamente. 
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+**Passo 1**: Instalar as dependências
+```
+npm i
+```
+**Passo 2**: Executar o front-end
+```
+npm run dev
+```
+**Passo 3**: Inserir no navegador a seguinte URL
+```
+http://localhost:3000
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## 📦 Tecnologias usadas:
+
+* [ReactJS](https://react.dev/)
+* [TypeScript](https://www.typescriptlang.org/)
+* [MaterialUI](https://mui.com/)
+* [axios](https://axios-http.com/ptbr/)
+* [sass](https://sass-lang.com/)
