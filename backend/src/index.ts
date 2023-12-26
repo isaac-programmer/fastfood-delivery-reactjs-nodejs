@@ -1,11 +1,11 @@
 import cors from "cors";
 import 'reflect-metadata';
 import express from "express";
-import { config } from "dotenv";
+// import { config } from "dotenv";
 import router from "./routes/routes";
 import { AppDataSource } from "./database/data-source";
 
-config();
+// config();
  
 const app = express();
 const port = 443;
