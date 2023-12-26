@@ -1,12 +1,14 @@
 {
   "include": ["*.ts", "src/**/*.ts"],
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
     "module": "commonjs",
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
+    "lib": ["es5", "es6", "dom"],
+    "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   }
