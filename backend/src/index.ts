@@ -8,11 +8,11 @@ import { AppDataSource } from "./database/data-source";
 config();
  
 const app = express();
-const port = 5000;
+const port = 443;
 
 // Configurações do CORS
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://ps-2024-estagio-ux.vercel.app/",
 };
 
 app.use(cors(corsOptions));
