@@ -1,5 +1,5 @@
+import "reflect-metadata";
 import cors from "cors";
-import 'reflect-metadata';
 import express from "express";
 // import { config } from "dotenv";
 import router from "./routes/routes";
