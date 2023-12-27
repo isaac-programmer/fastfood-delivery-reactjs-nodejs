@@ -1,8 +1,8 @@
-import { Entity, Column } from "typeorm";
+import { Entity, Column, PrimaryColumn } from "typeorm";
 
 @Entity("user")
 export class User {
-  @Column({ primary: true, generated: true })
+  @PrimaryColumn("int")
   public id!: number;
 
   @Column('varchar', { nullable: false, length: 6 })
