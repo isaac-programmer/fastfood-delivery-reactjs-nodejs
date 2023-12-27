@@ -12,5 +12,8 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true
+  },
+  "ts-loader": {
+    "compiler": "@swc/core"
   }
 }
