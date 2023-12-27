@@ -28,3 +28,5 @@ AppDataSource.initialize()
 .catch((error) => {
   console.error("Erro ao inicializar o banco de dados:", error);
 });
+
+export default app;
