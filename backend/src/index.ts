@@ -5,11 +5,11 @@ import router from "./routes/routes";
 import { AppDataSource } from "./database/data-source";
 
 const app = express();
-const port = 443;
+const port = 5000;
 
 // Configurações do CORS
 const corsOptions = {
-  origin: "https://ps-2024-estagio-ux.vercel.app/",
+  origin: "*",
 };
 
 app.use(cors(corsOptions));
