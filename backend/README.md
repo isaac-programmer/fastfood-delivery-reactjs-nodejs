@@ -2,7 +2,7 @@
 
 ### ⚙️ Pré-requisitos
 
-Para que o back-end funcione normalmente, será preciso ter instalado em sua máquina o **NodeJS**, na versão **16.16.0** e que a pasta **backend** esteja aberta na IDE ou no editor de código a ser utilizado.
+Para que o back-end funcione normalmente, será preciso ter instalado em sua máquina o **NodeJS**, na versão **>=18.x** e que a pasta **backend** esteja aberta na IDE ou no editor de código a ser utilizado.
 
 ### 🔨 Guia de instalação
 
