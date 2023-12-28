@@ -6,12 +6,12 @@ export class Product {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "text" })
+  @Column('varchar', { nullable: false, length: 200 })
   name: string;
 
-  @Column({ type: "text" })
+  @Column('varchar', { nullable: false, length: 12 })
   price: string;
 
-  @Column({ type: "text" })
+  @Column('varchar', { nullable: false, length: 200 })
   img: string;
 }

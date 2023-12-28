@@ -6,39 +6,39 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "text" })
+  @Column('varchar', { nullable: false, length: 6 })
   role: string;
 
-  @Column({ type: "text" })
+  @Column('char', { nullable: false, length: 14, unique: true })
   cpf: string;
 
-  @Column({ type: "text" })
+  @Column('varchar', { nullable: false, length: 200 })
   name: string;
 
-  @Column({ type: "text" })
+  @Column('varchar', { nullable: false, length: 200 })
   email: string;
 
-  @Column({ type: "text" })
+  @Column('char', { nullable: false, length: 15 })
   phone: string;
 
-  @Column({ type: "text" })
+  @Column('char', { nullable: false, length: 9 })
   cep: string;
 
-  @Column({ type: "text" })
+  @Column('char', { nullable: false, length: 2 })
   state: string;
 
-  @Column({ type: "text" })
+  @Column('varchar', { nullable: false, length: 120 })
   city: string;
 
-  @Column({ type: "text" })
+  @Column('varchar', { nullable: false, length: 120 })
   bairro: string;
 
-  @Column({ type: "text" })
+  @Column('varchar', { nullable: false, length: 200 })
   address: string;
 
-  @Column({ type: "int" })
+  @Column({ type: "int", nullable: false })
   number: number;
 
-  @Column({ type: "text" })
+  @Column('varchar', { nullable: false, length: 200 })
   complement: string;
 }
