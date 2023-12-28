@@ -6,39 +6,39 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "text" })
+  @Column({ type: "varchar" })
   role: string;
 
-  @Column({ type: "text", unique: true })
+  @Column({ type: "varchar", unique: true })
   cpf: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "varchar" })
   name: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "varchar" })
   email: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "varchar" })
   phone: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "varchar" })
   cep: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "varchar" })
   state: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "varchar" })
   city: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "varchar" })
   bairro: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "varchar" })
   address: string;
 
   @Column({ type: "int" })
   number: number;
 
-  @Column({ type: "text" })
+  @Column({ type: "varchar" })
   complement: string;
 }
