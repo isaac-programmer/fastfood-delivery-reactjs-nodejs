@@ -1,43 +1,44 @@
+import "reflect-metadata";
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("user")
 export class User {
   @PrimaryGeneratedColumn()
-  public id!: number;
+  id: number;
 
-  @Column('varchar', { nullable: false, length: 6 })
-  public role!: string;
+  @Column({ type: "text" })
+  role: string;
 
-  @Column('char', { nullable: false, length: 14, unique: true })
-  public cpf!: string;
+  @Column({ type: "text" })
+  cpf: string;
 
-  @Column('varchar', { nullable: false, length: 200 })
-  public name!: string;
+  @Column({ type: "text" })
+  name: string;
 
-  @Column('varchar', { nullable: false, length: 200 })
-  public email!: string;
+  @Column({ type: "text" })
+  email: string;
 
-  @Column('char', { nullable: false, length: 15 })
-  public phone!: string;
+  @Column({ type: "text" })
+  phone: string;
 
-  @Column('char', { nullable: false, length: 9 })
-  public cep!: string;
+  @Column({ type: "text" })
+  cep: string;
 
-  @Column('char', { nullable: false, length: 2 })
-  public state!: string;
+  @Column({ type: "text" })
+  state: string;
 
-  @Column('varchar', { nullable: false, length: 120 })
-  public city!: string;
+  @Column({ type: "text" })
+  city: string;
 
-  @Column('varchar', { nullable: false, length: 120 })
-  public bairro!: string;
+  @Column({ type: "text" })
+  bairro: string;
 
-  @Column('varchar', { nullable: false, length: 200 })
-  public address!: string;
+  @Column({ type: "text" })
+  address: string;
 
-  @Column({ nullable: false })
-  public number!: number;
+  @Column({ type: "number" })
+  number: number;
 
-  @Column('varchar', { nullable: false, length: 200 })
-  public complement!: string;
+  @Column({ type: "text" })
+  complement: string;
 }

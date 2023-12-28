@@ -1,16 +1,17 @@
-import { Entity, Column } from "typeorm";
+import "reflect-metadata";
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("product")
 export class Product {
-  @Column({ primary: true, generated: true })
-  public id!: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-  @Column('varchar', { nullable: false, length: 200 })
-  public name!: string;
+  @Column({ type: "text" })
+  name: string;
 
-  @Column('varchar', { nullable: false, length: 12 })
-  public price!: string;
+  @Column({ type: "text" })
+  price: string;
 
-  @Column('varchar', { nullable: false, length: 200 })
-  public img!: string;
+  @Column({ type: "text" })
+  img: string;
 }
