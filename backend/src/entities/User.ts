@@ -36,7 +36,7 @@ export class User {
   @Column({ type: "text" })
   address: string;
 
-  @Column({ type: "number" })
+  @Column({ type: "int" })
   number: number;
 
   @Column({ type: "text" })
