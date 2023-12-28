@@ -49,7 +49,7 @@ export const postUser = async (
   e.preventDefault();
   
   try {
-    await axios.post(`http://localhost:5000/user`, {...formData});
+    await axios.post(`https://fastfood-delivery-reactjs-nodejs.vercel.app/user`, {...formData});
     alert("Usuário cadastrado com sucesso!");
 
     // Redireciona para a tela de login
