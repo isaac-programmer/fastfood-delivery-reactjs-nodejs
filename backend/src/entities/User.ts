@@ -9,7 +9,7 @@ export class User {
   @Column({ type: "text" })
   role: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "varchar", unique: true })
   cpf: string;
 
   @Column({ type: "text" })
