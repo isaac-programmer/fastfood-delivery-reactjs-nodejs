@@ -7,8 +7,10 @@ const app = express();
 const port = 5000;
 
 // Configurações do CORS
+const allowedOrigins = ["http://localhost:3000", "https://fastfood-delivery-reactjs-nodejs-9ktq.vercel.app"];
+
 const corsOptions = {
-  origin: "*",
+  origin: allowedOrigins,
 };
 
 app.use(cors(corsOptions));
