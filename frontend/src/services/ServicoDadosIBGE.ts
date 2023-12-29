@@ -7,9 +7,7 @@ export const getStatesOrderByName = async (
   setStates: Dispatch<SetStateAction<State[]>>
 ) => {
   try {
-    const result = await axios.get(
-      "https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome"
-    );
+    const result = await axios.get("https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome");
 
     setStates(result.data);
   } catch (error) {

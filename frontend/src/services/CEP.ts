@@ -22,7 +22,7 @@ export const getDataByCep = async (
         bairro: formData.bairro === "" ? data.bairro : formData.bairro,
       });
     } else {
-      alert("CEP inválido");
+      alert("CEP inválido!");
     }
   } catch (error) {
     console.log(error);

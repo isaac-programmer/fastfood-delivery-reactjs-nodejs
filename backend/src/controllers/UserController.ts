@@ -43,7 +43,6 @@ export class UserController {
     try {
       await userRepository.save(createdUser);
       res.status(201).json(createdUser);
-
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       res.status(500).json({ error: "Erro ao criar o usuário" });

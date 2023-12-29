@@ -13,7 +13,7 @@ export const getUserById = async (
     setFormData(data);
   } catch (error) {
     console.log(error);
-    alert("Usuário não encontrado");
+    alert("Usuário não encontrado!");
   }
 };
 
@@ -66,7 +66,9 @@ export const postUser = async (
       console.log(error);
 
       if (error.response?.data.error === "CPF existente") {
-        alert("O CPF informado já está cadastrado");
+        alert("O CPF informado já está cadastrado!");
+      } else {
+        alert("Erro ao cadastrar o usuário!");
       }
     }
   } finally {
@@ -98,7 +100,9 @@ export const putUser = async (
       console.log(error);
 
       if (error.response?.data.error === "CPF existente") {
-        alert("O CPF informado já está cadastrado");
+        alert("O CPF informado já está cadastrado!");
+      } else {
+        alert("Erro ao atualizar o usuário!");
       }
     }
   } finally {

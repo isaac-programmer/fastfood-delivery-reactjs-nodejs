@@ -26,7 +26,7 @@ export const login = async (
     history("/");
   } catch (error: unknown) {
     console.log(error);
-    alert("Erro ao efetuar o login! Verifique o CPF informado");
+    alert("Erro ao efetuar o login! Verifique o CPF informado!");
   } finally {
     setLoading(false);
   }
