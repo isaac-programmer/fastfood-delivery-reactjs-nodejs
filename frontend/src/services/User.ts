@@ -9,7 +9,7 @@ export const getUserById = async (
   setFormData: Dispatch<SetStateAction<User>>
 ) => {
   try {
-    const { data } = await axios.get(`http://localhost:5000/user/${id}`);
+    const { data } = await axios.get(`${import.meta.env.VITE_FASTFOOD_DELIVERY_API}/user/${id}`);
     setFormData(data);
   } catch (error) {
     console.log(error);
@@ -23,12 +23,16 @@ export const getUsers = async (
   setLoading: Dispatch<SetStateAction<boolean>>
 ) => {
   try {
-    const { data } = await axios.get("http://localhost:5000/users");
+    const { data } = await axios.get(`${import.meta.env.VITE_FASTFOOD_DELIVERY_API}/users`);
 
     const userRoleSigned = sessionStorage.getItem("userRole");
 
-    if(userRoleSigned && userRoleSigned === "admin") {
-      setUsers(data.filter((user: User) => { return user.role === "client" }));
+    if (userRoleSigned && userRoleSigned === "admin") {
+      setUsers(
+        data.filter((user: User) => {
+          return user.role === "client";
+        })
+      );
     } else {
       setUsers(data);
     }
@@ -47,9 +51,12 @@ export const postUser = async (
   setLoading: Dispatch<SetStateAction<boolean>>
 ) => {
   e.preventDefault();
-  
+
   try {
-    await axios.post(`https://fastfood-delivery-reactjs-nodejs.vercel.app/user`, {...formData});
+    await axios.post(
+      `${import.meta.env.VITE_FASTFOOD_DELIVERY_API}/user`,
+      { ...formData }
+    );
     alert("Usuário cadastrado com sucesso!");
 
     // Redireciona para a tela de login
@@ -78,7 +85,10 @@ export const putUser = async (
   e.preventDefault();
 
   try {
-    await axios.put(`http://localhost:5000/user/${id}`, formData);
+    await axios.put(
+      `${import.meta.env.VITE_FASTFOOD_DELIVERY_API}/user/${id}`,
+      formData
+    );
     alert("Usuário atualizado com sucesso!");
 
     // Redireciona para a tela home
@@ -103,7 +113,7 @@ export const deleteUser = async (
   setReload: Dispatch<SetStateAction<boolean>>
 ) => {
   try {
-    await axios.delete(`http://localhost:5000/user/${idUser}`);
+    await axios.delete(`${import.meta.env.VITE_FASTFOOD_DELIVERY_API}/user/${idUser}`);
     alert("Usuário deletado com sucesso!");
     setReload(!reload);
   } catch (error) {

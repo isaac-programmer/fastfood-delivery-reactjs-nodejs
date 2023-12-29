@@ -8,7 +8,7 @@ export const getProducts = async (
   setProducts: Dispatch<SetStateAction<Product[]>>
 ) => {
   try {
-    const result = await axios.get<Product[]>("http://localhost:5000/products");
+    const result = await axios.get<Product[]>(`${import.meta.env.VITE_FASTFOOD_DELIVERY_API}/products`);
     setProducts(result.data);
   } catch (error) {
     console.log(error);
