@@ -28,19 +28,25 @@ export class UserController {
   // Rota para inserir um usuário
   async postUser(req: Request, res: Response) {
     const userRepository = AppDataSource.getRepository(User);
+
+    // Verificar se o CPF já existe na base de dados
+    const existingUser = await userRepository.findOne({ where: { cpf: req.body.cpf } });
+
+    if(existingUser) {
+      res.status(409).json({ error: "CPF existente" });
+      return;
+    }
+
+    // Caso o CPF não exista, criar e salvar o usuário
     const createdUser = userRepository.create(req.body);
 
     try {
       await userRepository.save(createdUser);
       res.status(201).json(createdUser);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      if(error.code === "ER_DUP_ENTRY") {
-        res.status(409).json({ error: "CPF existente" });
-      } else { 
-        res.status(500).json({ error: "Erro ao criar o usuário" });
-      }
+      res.status(500).json({ error: "Erro ao criar o usuário" });
     }
   }
 
@@ -53,7 +59,7 @@ export class UserController {
     try {
       const userToUpdate = await userRepository.findOneBy({ id: id });
 
-      if(!userToUpdate) {
+      if (!userToUpdate) {
         res.status(404).json({ error: "Usuário não encontrado" });
         return;
       }
