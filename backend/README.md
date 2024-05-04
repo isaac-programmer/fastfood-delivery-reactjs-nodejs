@@ -1,10 +1,10 @@
 # Manual - Execução do Back-End
 
-### ⚙️ Pré-requisitos
+## ⚙️ Pré-requisitos
 
 Para que o back-end funcione normalmente, será preciso ter instalado em sua máquina o **NodeJS**, na versão **>=18.x** e que a pasta **backend** esteja aberta na IDE ou no editor de código a ser utilizado.
 
-### 🔨 Guia de instalação
+## 🔨 Guia de instalação
 
 Considerando que os pré-requisitos foram satisfeitos, siga os passos a seguir para que a execução do back-end ocorra corretamente. 
 
@@ -17,7 +17,7 @@ npm i
 npm run dev
 ```
 
-### Observações
+## Observações
 
 O banco de dados consumido no back-end está hospedado no [db4free](https://www.db4free.net/index.php?language=pt), toda a estrutura do banco de dados já está criada e pronta para utilização. 
 
